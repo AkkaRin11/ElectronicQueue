@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="09-05-2024--user_event" author="AkkaRin11">
+        <preConditions>
+            <not>
+                <tableExists tableName="user_event"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="user_event">
+            <column name="id"
+                    type="bigint"
+                    autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"/>
+            </column>
+
+            <column name="user_id"
+                    type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_user"
+                             references="user(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="event_id"
+                    type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_event"
+                             references="event(id)"
+                             deleteCascade="true"/>
+            </column>
+
+
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
